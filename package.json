@@ -1,0 +1,21 @@
+{
+  "name": "element-scraper",
+  "version": "0.0.1",
+  "description": "Scrapes elements from an url",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BunnyCode/element-scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BunnyCode/element-scraper/issues"
+  },
+  "homepage": "https://github.com/BunnyCode/element-scraper#readme"
+}
