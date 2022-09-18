@@ -1,3 +1,8 @@
+/**
+ * This module is helping pick out parts of a webpage for later parsing.
+ * It can and probably will have breaking changes early on.
+ */
+
 import http from 'http'
 import https from 'https'
 
@@ -10,13 +15,23 @@ import https from 'https'
  */
 const getHtmlBody = async (url) => {
   return new Promise(resolve => {
+    try {
       if (isHttps(url)){
         https.get(url, response => {
           let responseData = ''
           response.on('data', (dataChunk) => responseData += dataChunk)
           response.on('end', () => resolve(responseData))
         })
-      }
+      } else {
+        http.get(url, response => {
+          let responseData = ''
+          response.on('data', (dataChunk) => responseData += dataChunk)
+          response.on('end', () => resolve(responseData))
+        })
+      }    
+    } catch (error) {
+      console.error(error)
+    }
   })
 }
 
