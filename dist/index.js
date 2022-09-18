@@ -10,7 +10,6 @@ import https from 'https'
  */
 const getHtmlBody = async (url) => {
   return new Promise(resolve => {
-      console.log(isHttps(url))
       if (isHttps(url)){
         https.get(url, response => {
           let responseData = ''
@@ -41,9 +40,17 @@ const getHtmlData = async(url) => {
   return htmlBody
 }
 
-const parseData = () => {
-  console.log('usuck')
+/**
+ * Non Greedy element parser, does global parsing
+ *
+ * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
+ * @param {*} dataToParse 
+ */
+const parseDataForElement = (elementMatch, dataToParse) => {
+  const parsePattern = `<.*${elementMatch}.*?>`
+  const regExp = new RegExp(parsePattern, 'g')
+  console.log(regExp.exec(dataToParse)[0])
 }
 
 
-export {getHtmlData, parseData, isHttps}
+export {getHtmlData, parseDataForElement, isHttps}
