@@ -70,10 +70,10 @@ const getHtmlData = async(url) => {
  * @return {Array} - Returns an array with all matching patterns.
  */
 const parseDataForElement = (elementMatch, dataToParse) => {
-  const matchesInPattern = []
   const parsePattern = `<.*${elementMatch}.*?>`
   const regExp = new RegExp(parsePattern, 'g')
-  console.log(regExp.exec(dataToParse)[0])
+  const matchesInPattern = [...dataToParse.matchAll(regExp)]
+  return matchesInPattern.map(element => element[0])
 }
 
 
