@@ -16,15 +16,14 @@ import https from 'https'
 const getHtmlBody = async (url) => {
   return new Promise(resolve => {
     try {
+      let responseData = ''
       if (isHttps(url)){
         https.get(url, response => {
-          let responseData = ''
           response.on('data', (dataChunk) => responseData += dataChunk)
           response.on('end', () => resolve(responseData))
         })
       } else {
         http.get(url, response => {
-          let responseData = ''
           response.on('data', (dataChunk) => responseData += dataChunk)
           response.on('end', () => resolve(responseData))
         })
@@ -38,6 +37,12 @@ const getHtmlBody = async (url) => {
 
 // EXPORTED FUNCTIONS
 
+/**
+ * Checks of URL string starts with https.
+ *
+ * @param {string} url - Takes a URL as a string to try and check if it starts with https
+ * @returns - Boolean True or false.
+ */
 const isHttps = (url) => {
   const protocol = url.split(':')[0]
   if (protocol.toLowerCase() === 'https'){
@@ -59,9 +64,11 @@ const getHtmlData = async(url) => {
  * Non Greedy element parser, does global parsing
  *
  * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
- * @param {*} dataToParse 
+ * @param {*} dataToParse
+ * @return {Array} - Returns an array with all matching patterns.
  */
 const parseDataForElement = (elementMatch, dataToParse) => {
+  const matchesInPattern = []
   const parsePattern = `<.*${elementMatch}.*?>`
   const regExp = new RegExp(parsePattern, 'g')
   console.log(regExp.exec(dataToParse)[0])
