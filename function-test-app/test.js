@@ -1,4 +1,4 @@
-import {parseDataForElement, getHtmlData, isHttps} from '../dist/index.js'
+import {parseDataForElements, parseElementsInnerText, getHtmlData, isHttps} from '../dist/index.js'
 
 const url = 'https://www.klart.se/se/v%C3%A4stra-g%C3%B6talands-l%C3%A4n/v%C3%A4der-g%C3%B6teborg/'
 // const url = 'https://oxxygen.io'
@@ -23,9 +23,13 @@ const runAllTests = async () => {
   
   // Test parsedata
   
-  console.info('\nTesting parse RegExp function\n')
-  const matches = parseDataForElement('high-temp', data)
-  console.log(matches)
+  console.info('\nTesting parse HTML element RegExp function\n')
+  const matches = parseDataForElements(data, 'temp-high')
+  // console.log(matches)
+  
+  console.info('\nTesting parse inner HTML element RegExp function\n')
+  const innerMatches = parseElementsInnerText(matches, )
+  console.log(innerMatches)
 
 }
 

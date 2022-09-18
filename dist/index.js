@@ -35,7 +35,7 @@ const getHtmlBody = async (url) => {
 }
 
 
-// EXPORTED FUNCTIONS
+
 
 /**
  * Checks of URL string starts with https.
@@ -62,19 +62,41 @@ const getHtmlData = async(url) => {
   return htmlBody
 }
 
+
 /**
- * Non Greedy element parser, does global parsing
+ * A greedy element parser, does global parsing
  *
  * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
- * @param {*} dataToParse
+ * @param {string} dataToParse - Takes string to pars for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const parseDataForElement = (elementMatch, dataToParse) => {
-  const parsePattern = `<.*${elementMatch}.*?>`
+const parseDataForElements = (dataToParse, elementMatch) => {
+  const parsePattern = `<.*${elementMatch}.*>`
   const regExp = new RegExp(parsePattern, 'g')
   const matchesInPattern = [...dataToParse.matchAll(regExp)]
   return matchesInPattern.map(element => element[0])
 }
 
 
-export {getHtmlData, parseDataForElement, isHttps}
+/**
+ * A non greedy element parser, To get text in elements.
+ * Will get all elemnts if elementMatch is ommited ( .* ). can be used with regex strings like \s \w and so on.
+ * Only returns non empty elements.
+ *
+ * @param {string} elementMatch - Part of an element that you want to get, RegExp or text. If omitted will return all text.
+ * @param {Array} dataToParse - Takes array to parse.
+ * @return {Array} - Returns an array with all matching patterns.
+ */
+const parseElementsInnerText = (dataToParse, elementMatch) => {
+  const captureGroup = elementMatch ? elementMatch : '.*'
+  const parsePattern = `>.*?(${captureGroup}?).*?<`
+  const regExp = new RegExp(parsePattern, 'g')
+  const matchesInPattern = [...dataToParse.join().matchAll(regExp)]
+  return matchesInPattern.map((element) => {
+      return element[1]
+  })
+}
+
+
+
+export {getHtmlData, parseDataForElements, parseElementsInnerText, isHttps}
