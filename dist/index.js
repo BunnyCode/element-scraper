@@ -52,8 +52,10 @@ const isHttps = (url) => {
 }
 
 /**
- * 
- * @param {string} url 
+ * returns source HTML from URL as a string
+ *
+ * @param {string} url - Takes a URL as string
+ * @returns {string} - Returns HTML page as a string
  */
 const getHtmlData = async(url) => {
   const htmlBody = await getHtmlBody(url)
