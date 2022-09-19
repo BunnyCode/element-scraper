@@ -23,18 +23,68 @@ import {getHtmlData, parseDataForElement, parseElementsInnerText} from 'element-
 Alternate methods
 
 ```js
-import {hasCorrectHtmlProtocol, isHttps, parseElementsInnerText} from 'element-scraper'
+import {hasCorrectHtmlProtocol, isHttps, parseDataForMultiLineElements} from 'element-scraper'
 ```
 
 ---
 
-#### Parsing elements
+### Getting Data
+
+#### hasCorrectHtmlProtocol
+
+```js
+hasCorrectHtmlProtocol(url)
+```
+
+Checks if the URL seems to have to correct protocol, as in http or https.
+It will however not check that it is a completely valid URL
+
+#### isHttps
+
+```js
+isHttps(url)
+```
+
+You can check if the URL supplied is HTTPS, this will return true or false.
+
+#### getHtmlData
+
+```js
+await getHtmlData(url)
+```
+
+**This function is asynchronous**
+To GET the entire HTML page you want to parse, as a string.
+
+---
 
 
-##### parseDataForElement
+### Parsing elements
+
+Once you have the data string, you can check start parsing out the elements you would like to get.
 
 
-##### parseElementsInnerText
+#### parseDataForElement
+
+```js
+parseDataForElements(dataToParse, elementMatch)
+```
+
+You pass your data string as __dataToParse__. To find a specific class name or element ID pass this as __elementMatch__.
+
+
+#### parseDataForMultiLineElements
+
+```js
+parseDataForMultiLineElements(dataToParse, elementMatch)
+```
+
+To get a multi-line element you use __parseDataForMultiLineElements__
+it looks for the opening and closing tag.
+You pass your data string as __dataToParse__. To find a specific class name or element ID pass this as __elementMatch__. 
+
+
+#### parseElementsInnerText
 
 ```js
 parseElementsInnerText(dataToParse, getEmpty)
