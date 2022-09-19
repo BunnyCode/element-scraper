@@ -2,6 +2,8 @@
 Scrapes elements from a URL
 Written in pure JavaScript, and without any extra dependencies.
 
+> Be
+
 ### How to install
 
 This module is intended to be used as a helper to fetch elements on a webpage.

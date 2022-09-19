@@ -51,6 +51,7 @@ const isHttps = (url) => {
   return false
 }
 
+
 /**
  * returns source HTML from URL as a string
  *
@@ -96,7 +97,6 @@ const parseElementsInnerText = (dataToParse, elementMatch) => {
       return element[1]
   })
 }
-
 
 
 export {getHtmlData, parseDataForElements, parseElementsInnerText, isHttps}
