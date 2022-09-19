@@ -25,10 +25,14 @@ const runAllTests = async () => {
   
   console.info('\nTesting parse HTML element RegExp function\n')
   const matches = parseDataForElements(data, 'temp-high')
-  // console.log(matches)
+  console.log(matches)
   
   console.info('\nTesting parse inner HTML element RegExp function\n')
-  const innerMatches = parseElementsInnerText(matches, )
+  let innerMatches = parseElementsInnerText(matches, true)
+  console.info("Should contain empty slots in array")
+  console.log(innerMatches)
+  innerMatches = parseElementsInnerText(matches)
+  console.info("Should not contain empty slots in array")
   console.log(innerMatches)
 
 }

@@ -34,7 +34,23 @@ const getHtmlBody = async (url) => {
   })
 }
 
+//TODO break out getHtmlBody if possible.
 
+
+
+/**
+ * Makes sure the string starts with http or https
+ *
+ * @param {string} url - Takes a URL as a string to try and check if it starts with http:// or https://
+ * @returns - Boolean True or false.
+ */
+const hasCorrectHtmlProtocol = (url) => {
+  const protocol = url.split('://')[0].toLowerCase()
+  if (protocol === 'http' || protocol === 'https'){
+    return true
+  }
+  return false
+}
 
 
 /**
@@ -79,24 +95,40 @@ const parseDataForElements = (dataToParse, elementMatch) => {
 }
 
 
+// TODO: Get multiline elements
+
 /**
- * A non greedy element parser, To get text in elements.
- * Will get all elemnts if elementMatch is ommited ( .* ). can be used with regex strings like \s \w and so on.
- * Only returns non empty elements.
+ * A greedy Multiline parser, does global parsing
  *
- * @param {string} elementMatch - Part of an element that you want to get, RegExp or text. If omitted will return all text.
- * @param {Array} dataToParse - Takes array to parse.
+ * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
+ * @param {string} dataToParse - Takes string to pars for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const parseElementsInnerText = (dataToParse, elementMatch) => {
-  const captureGroup = elementMatch ? elementMatch : '.*'
-  const parsePattern = `>.*?(${captureGroup}?).*?<`
+const parseDataForMultiLineElements = (dataToParse, elementMatch) => {
+  const parsePattern = `<.*${elementMatch}.*>`
   const regExp = new RegExp(parsePattern, 'g')
-  const matchesInPattern = [...dataToParse.join().matchAll(regExp)]
+  const matchesInPattern = [...dataToParse.matchAll(regExp)]
+  return matchesInPattern.map(element => element[0])
+}
+
+
+/**
+ * A non greedy element parser, To get text in elements.
+ *
+ * @param {boolean} getEmpty - True or false to filter out empty spaces. 
+ * @param {Array} dataToParse - Takes array to parse, joins array elements with newline
+ * @return {Array} - Returns an array with all matching patterns, Non Greedy RegExp.
+ */
+const parseElementsInnerText = (dataToParse, getEmpty) => {
+  const parsePattern = getEmpty ? `>(.*?)<` : `>(.+?)<`
+  const joinArrayWith = '\n'
+  const captureGroup = 1
+  const regExp = new RegExp(parsePattern, 'g')
+  const matchesInPattern = [...dataToParse.join(`${joinArrayWith}`).matchAll(regExp)]
   return matchesInPattern.map((element) => {
-      return element[1]
+      return element[`${captureGroup}`]
   })
 }
 
 
-export {getHtmlData, parseDataForElements, parseElementsInnerText, isHttps}
+export {getHtmlData, parseDataForElements, parseElementsInnerText, isHttps, hasCorrectHtmlProtocol}
