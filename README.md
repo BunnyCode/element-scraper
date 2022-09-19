@@ -4,9 +4,12 @@ Written in pure JavaScript, and without any extra dependencies.
 
 > **Be aware**: names of methods are probable to change until version 0.1.0
 
+**release notes can be found [here](releasenotes.md)**
+
 ### How to install
 
 This module is intended to be used as a helper to fetch elements on a webpage.
+It does not handle logins at its current stage.
 
 > npm i element-scraper
 
@@ -39,7 +42,8 @@ parseElementsInnerText(dataToParse, getEmpty)
 
 Gets all text within >< but not empty spaces (see note) and defaults to **getEmpty** as false / omitted.
 
-> Note: the empty array data from this function comes from the emptiness in \</innerElement\>\</outerElement\> in an element like this.\<outerElement\>\<innerElement\>Some text\</innerElement\>\</outerElement\>
+> Note: the empty array data from this function comes from the emptiness in
+\</innerElement\>\</outerElement\> in an element like this.\<outerElement\>Some text\<innerElement\>Some more text\</innerElement\>\</outerElement\>
 
 ```console
 [
@@ -56,7 +60,7 @@ Gets all text within >< but not empty spaces (see note) and defaults to **getEmp
 ]
 ```
 
-If you want to have the empty spaces make sure **getEmpty** is set to true
+If you want to have the empty spaces, like above make sure **getEmpty** is set to true
 
 ### Note
 
