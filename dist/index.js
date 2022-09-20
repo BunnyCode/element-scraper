@@ -106,7 +106,7 @@ const parseDataForElements = (dataToParse, elementMatch) => {
  */
 const parseDataForMultiLineElements = (dataToParse, elementMatch) => {
   // <([\w]+).*?temp-high(.*\n)*?.+?(\<\/\1>[\n ]*)+
-  const parsePattern = `<([\w]+).*?${elementMatch}(.*\n)*?.+?(\<\/\1>[\n ]*)+`
+  const parsePattern = `<([\\w]+).*?${elementMatch}(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
   const regExp = new RegExp(parsePattern, 'g')
   const matchesInPattern = [...dataToParse.matchAll(regExp)]
   return matchesInPattern.map(element => element[0])
