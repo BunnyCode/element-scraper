@@ -54,7 +54,7 @@ const runAllTests = async () => {
   // Test multiline parse
   consoleLine()
   console.info('\nTesting multiline HTML element RegExp parse function (div with class end)\n')
-  console.log(parseDataForMultiLineElements(data, 'end'))
+  console.log(parseDataForMultiLineElements(data, 'div'))
 }
 
 runAllTests()
