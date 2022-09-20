@@ -36,9 +36,9 @@ const runAllTests = async () => {
   // Test parsedata
   consoleLine()
   console.info('\nTesting parse HTML element RegExp function\n')
-  const matches = parseDataForElements(data, 'strong')
+  const matches = parseDataForElements(data, 'inner2')
   console.log(matches)
-  console.log("\n [ '<strong>', '<\/strong><\/div>' ] expected")
+  console.log('\n[ `<div id='inner2' class="di2">This is inner 2</div></div>` ] expected')
   
   consoleLine()
   console.info('\nTesting parse inner HTML element RegExp function\n')
