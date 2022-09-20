@@ -4,7 +4,7 @@ Written in pure JavaScript, and without any extra dependencies.
 
 > **Be aware**: names of methods are probable to change until version 0.1.0
 
-**release notes can be found [here](releasenotes.md)**
+**release notes can be found [here](https://github.com/BunnyCode/element-scraper/blob/main/releasenotes.md)**
 
 ### How to install
 
@@ -30,6 +30,7 @@ import {hasCorrectHtmlProtocol, isHttps, parseDataForMultiLineElements} from 'el
 
 ### Getting Data
 
+
 #### hasCorrectHtmlProtocol
 
 ```js
@@ -39,6 +40,7 @@ hasCorrectHtmlProtocol(url)
 Checks if the URL seems to have to correct protocol, as in http or https.
 It will however not check that it is a completely valid URL
 
+
 #### isHttps
 
 ```js
@@ -46,6 +48,7 @@ isHttps(url)
 ```
 
 You can check if the URL supplied is HTTPS, this will return true or false.
+
 
 #### getHtmlData
 

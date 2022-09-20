@@ -105,7 +105,8 @@ const parseDataForElements = (dataToParse, elementMatch) => {
  * @return {Array} - Returns an array with all matching patterns.
  */
 const parseDataForMultiLineElements = (dataToParse, elementMatch) => {
-  const parsePattern = `<.*${elementMatch}.*>`
+  // <([\w]+).*?temp-high(.*\n)*?.+?(\<\/\1>[\n ]*)+
+  const parsePattern = `<([\w]+).*?${elementMatch}(.*\n)*?.+?(\<\/\1>[\n ]*)+`
   const regExp = new RegExp(parsePattern, 'g')
   const matchesInPattern = [...dataToParse.matchAll(regExp)]
   return matchesInPattern.map(element => element[0])
@@ -131,4 +132,4 @@ const parseElementsInnerText = (dataToParse, getEmpty) => {
 }
 
 
-export {getHtmlData, parseDataForElements, parseElementsInnerText, isHttps, hasCorrectHtmlProtocol}
+export {getHtmlData, parseDataForElements, parseDataForMultiLineElements, parseElementsInnerText, isHttps, hasCorrectHtmlProtocol}
