@@ -14,7 +14,7 @@ const runAllTests = async () => {
   console.info("Running all tests for defined functions:\n========================================\n")
 
   // Test getting data
-  const data = await getHtmlData(url)
+  const testData = await getHtmlData(url)
 
   // Test is http
   consoleLine()
@@ -37,7 +37,7 @@ const runAllTests = async () => {
   // Test parsedata
   consoleLine()
   console.info('\nTesting parse HTML element RegExp function\nGot: ')
-  const matches = getDataForElements(data, 'inner2')
+  const matches = getDataForElements(testData, 'inner2')
   console.log(matches)
   console.log("\nexpected\n[ \"<div id='inner2' class='di2'>This is inner 2</div></div>\" ]")
   
@@ -54,7 +54,7 @@ const runAllTests = async () => {
   // Test multiline parse
   consoleLine()
   console.info('\nTesting multiline HTML element RegExp parse function (div with class end)\n')
-  console.log(greedyFindMultiLineElementsByAttributeOrText(data, 'div'))
+  console.log(greedyFindMultiLineElementsByAttributeOrText(testData, 'div'))
 }
 
 runAllTests()
