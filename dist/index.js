@@ -87,15 +87,13 @@ const getHtmlData = async(url) => {
  * @param {string} dataToParse - Takes string to pars for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const parseDataForElements = (dataToParse, elementMatch) => {
+const getDataForElements = (dataToParse, elementMatch) => {
   const parsePattern = `<.*${elementMatch}.*>`
   const regExp = new RegExp(parsePattern, 'g')
   const matchesInPattern = [...dataToParse.matchAll(regExp)]
   return matchesInPattern.map(element => element[0])
 }
 
-
-// TODO: Get multiline elements
 
 /**
  * A greedy Multiline parser, does global parsing
@@ -104,32 +102,80 @@ const parseDataForElements = (dataToParse, elementMatch) => {
  * @param {string} dataToParse - Takes string to pars for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const parseDataForMultiLineElements = (dataToParse, elementMatch) => {
+const greedyFindMultiLineElementsByAttributeOrText = (dataToParse, textOrAttributeMatch) => {
   // <([\w]+).*?temp-high(.*\n)*?.+?(\<\/\1>[\n ]*)+
-  const parsePattern = `<([\\w]+).*?${elementMatch}(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
-  const regExp = new RegExp(parsePattern, 'g')
+  const getElementStartAndEndByAttributeOrText = `<([\\w]+).*?${textOrAttributeMatch}(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
+  const regExp = new RegExp(getElementStartAndEndByAttributeOrText, 'g')
   const matchesInPattern = [...dataToParse.matchAll(regExp)]
   return matchesInPattern.map(element => element[0])
 }
 
 
 /**
+ * A non greedy Multiline parser, does global parsing
+ *
+ * @param {string} elementToMatch - Gets multi and singleline elements by type.
+ * @param {string} dataToParse - Takes string to pars for matches.
+ * @return {Array} - Returns an array with all matching patterns.
+ */
+const nonGreedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
+  const findMultilineElementByType = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+?`
+  return findMultilineElementsWithRegexp(dataToParse, findMultilineElementByType)
+}
+
+
+/**
+ * A greedy Multiline parser, does global parsing
+ *
+ * @param {string} elementToMatch - Gets multi and singleline elements by type.
+ * @param {string} dataToParse - Takes string to pars for matches.
+ * @return {Array} - Returns an array with all matching patterns.
+ */
+const greedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
+  const findMultilineElementByType = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
+  return findMultilineElementsWithRegexp(dataToParse, findMultilineElementByType)
+}
+
+/**
+ * Internal helper for element type finder.
+ *
+ * @param {array} dataToParse - Data to parse with regexp
+ * @param {*} regexpPattern - Regexp to use for finding element
+ * @returns 
+ */
+const findMultilineElementsWithRegexp = (dataToParse, regexpPattern) => {
+  const captureGroup = 1
+  const applyPatternGlobaly = 'g'
+  const regExp = new RegExp(regexpPattern, applyPatternGlobaly)
+  const matchesInPattern = [...dataToParse.matchAll(regExp)]
+  return matchesInPattern.map(element => element[captureGroup])
+}
+
+/**
  * A non greedy element parser, To get text in elements.
  *
- * @param {boolean} getEmpty - True or false to filter out empty spaces. 
+ * @param {boolean} getEmpty - True or, false to filter out empty spaces. 
  * @param {Array} dataToParse - Takes array to parse, joins array elements with newline
  * @return {Array} - Returns an array with all matching patterns, Non Greedy RegExp.
  */
-const parseElementsInnerText = (dataToParse, getEmpty) => {
-  const parsePattern = getEmpty ? `>(.*?)<` : `>(.+?)<`
+const nonGreedyFindSingleLineElementsInnerText = (dataToParse, getEmpty) => {
+  const findEmpty = getEmpty ? `>(.*?)<` : `>(.+?)<`
   const joinArrayWith = '\n'
   const captureGroup = 1
-  const regExp = new RegExp(parsePattern, 'g')
+  const applyPatternGlobaly = 'g'
+  const regExp = new RegExp(findEmpty, applyPatternGlobaly)
   const matchesInPattern = [...dataToParse.join(`${joinArrayWith}`).matchAll(regExp)]
   return matchesInPattern.map((element) => {
-      return element[`${captureGroup}`]
+      return element[captureGroup]
   })
 }
 
 
-export {getHtmlData, parseDataForElements, parseDataForMultiLineElements, parseElementsInnerText, isHttps, hasCorrectHtmlProtocol}
+export {getHtmlData,
+        getDataForElements,
+        greedyFindMultiLineElementsByAttributeOrText,
+        greedyFindMultiLineElementsByType,
+        nonGreedyFindMultiLineElementsByType,
+        nonGreedyFindSingleLineElementsInnerText,
+        isHttps,
+        hasCorrectHtmlProtocol}

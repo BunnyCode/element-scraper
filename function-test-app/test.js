@@ -1,4 +1,4 @@
-import {parseDataForElements, parseElementsInnerText, parseDataForMultiLineElements} from '../dist/index.js'
+import {getDataForElements, parseElementsInnerText, findMultiLineElementsByAttributeOrText} from '../dist/index.js'
 import {getHtmlData, isHttps, hasCorrectHtmlProtocol} from '../dist/index.js'
 
 // const url = 'https://www.klart.se/se/v%C3%A4stra-g%C3%B6talands-l%C3%A4n/v%C3%A4der-g%C3%B6teborg/'
@@ -37,7 +37,7 @@ const runAllTests = async () => {
   // Test parsedata
   consoleLine()
   console.info('\nTesting parse HTML element RegExp function\n')
-  const matches = parseDataForElements(data, 'inner2')
+  const matches = getDataForElements(data, 'div')
   console.log(matches)
   console.log("\nexpected\n[ \"<div id='inner2' class='di2'>This is inner 2</div></div>\" ]")
   
@@ -54,7 +54,7 @@ const runAllTests = async () => {
   // Test multiline parse
   consoleLine()
   console.info('\nTesting multiline HTML element RegExp parse function (div with class end)\n')
-  console.log(parseDataForMultiLineElements(data, 'div'))
+  console.log(findMultiLineElementsByAttributeOrText(data, 'div'))
 }
 
 runAllTests()
