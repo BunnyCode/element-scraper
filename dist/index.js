@@ -5,6 +5,8 @@
 
 import http from 'http'
 import https from 'https'
+import HttpCall from './httpCall.js'
+
 
 
 /**
@@ -14,29 +16,9 @@ import https from 'https'
  * @returns Promise - when resolved this is a string.
  */
 const getHtmlBody = async (url) => {
-  return new Promise(resolve => {
-    try {
-      let responseData = ''
-      if (isHttps(url)){
-        https.get(url, response => {
-          response.on('data', (dataChunk) => responseData += dataChunk)
-          response.on('end', () => resolve(responseData))
-        })
-      } else {
-        http.get(url, response => {
-          response.on('data', (dataChunk) => responseData += dataChunk)
-          response.on('end', () => resolve(responseData))
-        })
-      }    
-    } catch (error) {
-      console.error(error)
-    }
-  })
+  const httpCall = new HttpCall(url) 
+  return await httpCall.getRawHtml()
 }
-
-//TODO break out getHtmlBody if possible.
-
-
 
 /**
  * Makes sure the string starts with http or https
@@ -60,11 +42,8 @@ const hasCorrectHtmlProtocol = (url) => {
  * @returns - Boolean True or false.
  */
 const isHttps = (url) => {
-  const protocol = url.split(':')[0]
-  if (protocol.toLowerCase() === 'https'){
-    return true
-  }
-  return false
+  const httpCall = new HttpCall(url)
+  return httpCall.isHttps() 
 }
 
 
@@ -136,6 +115,8 @@ const greedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
   return findMultilineElementsWithRegexp(dataToParse, findMultilineElementByType)
 }
 
+
+// move to regexp class.
 /**
  * Internal helper for element type finder.
  *

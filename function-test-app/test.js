@@ -1,4 +1,4 @@
-import {getDataForElements, parseElementsInnerText, findMultiLineElementsByAttributeOrText} from '../dist/index.js'
+import {getDataForElements, nonGreedyFindSingleLineElementsInnerText, greedyFindMultiLineElementsByAttributeOrText} from '../dist/index.js'
 import {getHtmlData, isHttps, hasCorrectHtmlProtocol} from '../dist/index.js'
 
 // const url = 'https://www.klart.se/se/v%C3%A4stra-g%C3%B6talands-l%C3%A4n/v%C3%A4der-g%C3%B6teborg/'
@@ -18,8 +18,8 @@ const runAllTests = async () => {
 
   // Test is http
   consoleLine()
-  console.info('\nTesting protocol ftp agains http\n')
-  console.info('should return false:', !isHttps(url))
+  console.info('\nTesting protocol FTP agains isHttps\n')
+  console.info('should return false:', isHttps(incorrectUrl))
   
   // Test is http
   consoleLine()
@@ -36,25 +36,25 @@ const runAllTests = async () => {
   
   // Test parsedata
   consoleLine()
-  console.info('\nTesting parse HTML element RegExp function\n')
-  const matches = getDataForElements(data, 'div')
+  console.info('\nTesting parse HTML element RegExp function\nGot: ')
+  const matches = getDataForElements(data, 'inner2')
   console.log(matches)
   console.log("\nexpected\n[ \"<div id='inner2' class='di2'>This is inner 2</div></div>\" ]")
   
   // Test inner text parse
   consoleLine()
   console.info('\nTesting parse inner HTML element RegExp function\n')
-  let innerMatches = parseElementsInnerText(matches, true)
+  let innerMatches = nonGreedyFindSingleLineElementsInnerText(matches, true)
   console.info("Should contain empty slots in array")
   console.log(innerMatches)
-  innerMatches = parseElementsInnerText(matches)
-  console.info("Should not contain empty slots in array")
+  innerMatches = nonGreedyFindSingleLineElementsInnerText(matches)
+  console.info("Should NOT contain empty slots in array")
   console.log(innerMatches)
 
   // Test multiline parse
   consoleLine()
   console.info('\nTesting multiline HTML element RegExp parse function (div with class end)\n')
-  console.log(findMultiLineElementsByAttributeOrText(data, 'div'))
+  console.log(greedyFindMultiLineElementsByAttributeOrText(data, 'div'))
 }
 
 runAllTests()
