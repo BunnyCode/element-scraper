@@ -161,5 +161,6 @@ export {getHtmlData,
         greedyFindMultiLineElementsByType,
         nonGreedyMultiLineElementsByType,
         nonGreedyFindSingleLineElementsInnerText,
+        findMultilineElementsWithRegexp,
         isHttps,
         hasCorrectHtmlProtocol}
