@@ -1,7 +1,15 @@
-import {getDataForElements, nonGreedyFindSingleLineElementsInnerText, greedyFindMultiLineElementsByAttributeOrText} from '../dist/index.js'
-import {getHtmlData, isHttps, hasCorrectHtmlProtocol} from '../dist/index.js'
+import {getDataForElements,
+        getHtmlData,
+        isHttps,
+        hasCorrectHtmlProtocol,
+        nonGreedyFindSingleLineElementsInnerText,
+        greedyFindMultiLineElementsByAttributeOrText,
+        nonGreedyMultiLineElementsByType,
+        greedyFindMultiLineElementsByType,
 
-// const url = 'https://www.klart.se/se/v%C3%A4stra-g%C3%B6talands-l%C3%A4n/v%C3%A4der-g%C3%B6teborg/'
+      } from '../dist/index.js'
+
+
 const url = 'https://bunnycode.github.io/element-scraper/'
 const incorrectUrl = 'ftp://bunnycode.github.io/element-scraper/'
 

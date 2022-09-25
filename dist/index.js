@@ -6,6 +6,9 @@
 import http from 'http'
 import https from 'https'
 import HttpCall from './httpCall.js'
+import RegexpParsing from './regexpParsing.js'
+import regexpParsing from './regexpParsing.js'
+
 
 
 
@@ -97,9 +100,9 @@ const greedyFindMultiLineElementsByAttributeOrText = (dataToParse, textOrAttribu
  * @param {string} dataToParse - Takes string to pars for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const nonGreedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
-  const findMultilineElementByType = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+?`
-  return findMultilineElementsWithRegexp(dataToParse, findMultilineElementByType)
+const nonGreedyMultiLineElementsByType = (dataToParse, elementToMatch) => {
+  const regexpParsing = new RegexpParsing()
+  return regexpParsing.nonGreedyFindMultiLineElementsByType(dataToParse, elementToMatch)
 }
 
 
@@ -111,8 +114,8 @@ const nonGreedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
  * @return {Array} - Returns an array with all matching patterns.
  */
 const greedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
-  const findMultilineElementByType = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
-  return findMultilineElementsWithRegexp(dataToParse, findMultilineElementByType)
+  const regexpParsing = new RegexpParsing()
+  return regexpParsing.greedyMultiLineElementsByType(dataToParse, elementToMatch)
 }
 
 
@@ -156,7 +159,7 @@ export {getHtmlData,
         getDataForElements,
         greedyFindMultiLineElementsByAttributeOrText,
         greedyFindMultiLineElementsByType,
-        nonGreedyFindMultiLineElementsByType,
+        nonGreedyMultiLineElementsByType,
         nonGreedyFindSingleLineElementsInnerText,
         isHttps,
         hasCorrectHtmlProtocol}
