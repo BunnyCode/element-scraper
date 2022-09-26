@@ -115,6 +115,12 @@ Gets all text within >< but not empty spaces (see note) and defaults to **getEmp
 
 If you want to have the empty spaces, like above make sure **getEmpty** is set to true
 
+### Participate in this module
+
+If you want to participate in this module, feel free to do pull requests towards the main branch.
+I will review them when time allows. Please make sure your commit message is clear on what it is trying to solve or add.
+If there are issues with how the module works, create and issue, with an example for me to review. 
+
 ### Note
 
 This is a school project and may or may not be maintained after the course.

@@ -4,7 +4,7 @@ Version updates will be documented with bullet points on this page.
 
 ---
 
-#### 0.0.4
+#### 0.1.0
 
 * Names updated with greedy or non-greedy depending on how they parse.
 * Broken out HTTP call and check functions to its own class.

@@ -34,7 +34,7 @@ const runAllTests = async () => {
 
   // Test is hasCorrectHtmlProtocol
   consoleLine()
-  console.info('\nhasCorrectHtmlProtocol()\n\nTesting if url starts with http\n')
+  console.info('\nhasCorrectHtmlProtocol()\n\nTesting if URL starts with HTTP\n')
   console.info('should return false:', hasCorrectHtmlProtocol(incorrectUrl), incorrectUrl)
   console.info('should return true:', hasCorrectHtmlProtocol(url), url)
   // Test is http
@@ -52,7 +52,7 @@ const runAllTests = async () => {
 
   // Test is https
   consoleLine()
-  console.info('isHttps()\n\nTesting HTTPS (real https and http)\n')
+  console.info('isHttps()\n\nTesting HTTPS (actual https and http)\n')
   console.info('should return true:', isHttps(url), `(${url})`)
   console.info('should return false:', isHttps('http://dummy.com'), '(http://dummy.com)')
   
