@@ -82,7 +82,7 @@ Se testreport för output
 | greedyFindMultiLineElementsByAttributeOrText| (testData, 'end')  klassen end                | array med div        | PASS             |
 ​
 
-För de sista 3 testerna se testrapporten, då de inte får plats i tabellen på ett bra sätt.
+För de sista 3 testerna se [testrapporten](https://github.com/BunnyCode/element-scraper/blob/main/testreport.md), då de inte får plats i tabellen på ett bra sätt.
 ​
 ## Kodkvalitetskrav
 ​
