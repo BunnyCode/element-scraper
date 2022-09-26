@@ -125,7 +125,7 @@ Ett undantag finns här, för att plocka ut "tomma texter" bland elementen. Denn
 > Reflektera över uppgiften utifrån ett kodkvalitetsperspektiv. Använd begrepp ifrån boken. 
 
 Det är relativt svårt att hitta bra och korta namn till en funktion. Speciellt med beskrivande namn som hjälper med förståelse, altså **descriptive names**.
-En sak som slog mig var att det kan vara svårt om man har flera metoder, som har nonGreedy eller greedy i början. Även om dessa namn är beskrivande enligt **Descriptive names**. Dessa namn har även en tendens att likna varandra i camelCase. 
+En sak som slog mig var att det kan vara svårt om man har flera metoder, som har nonGreedy eller greedy i början. Även om dessa namn är beskrivande enligt **Descriptive names**, så har dessa namn har även en tendens att likna varandra i camelCase. 
 Jag har gjort ett par itterationer med namngivningen för att nå en "pretty much what you expected" känsla.
 Jag är medveten om **argument flags** i RegexpParsing klassen kan förbättras med hjälp av konstruktorn, där med dra ner argumentet för samtliga metoder till ett argument. I den mån jag kunnat är det **Monadic**.
 Jag bröt ut en del hjälpfunktioner för att följa **Do one thing** regeln. Men här kan man ju fråga sig man verkligen gör en sak ändå. Eller om man skulle kallat varje metod för sig och sen skickat svaret vidare till nästa. Detta hade dock bidragit till mer kod för utvecklaren. 
