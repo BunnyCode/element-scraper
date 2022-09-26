@@ -3,11 +3,8 @@
  * It can and probably will have breaking changes early on.
  */
 
-import http from 'http'
-import https from 'https'
 import HttpCall from './httpCall.js'
 import RegexpParsing from './regexpParsing.js'
-import regexpParsing from './regexpParsing.js'
 
 
 /**
@@ -28,11 +25,8 @@ const getHtmlBody = async (url) => {
  * @returns - Boolean True or false.
  */
 const hasCorrectHtmlProtocol = (url) => {
-  const protocol = url.split('://')[0].toLowerCase()
-  if (protocol === 'http' || protocol === 'https'){
-    return true
-  }
-  return false
+  const httpCall = new HttpCall(url)
+  return httpCall.hasCorrectHtmlProtocol(url)
 }
 
 

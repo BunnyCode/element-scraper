@@ -17,6 +17,20 @@ export default class HttpCall {
     return false
   }
 
+  /**
+   * Makes sure the string starts with http or https
+   *
+   * @param {string} url - Takes a URL as a string to try and check if it starts with http:// or https://
+   * @returns - Boolean True or false.
+   */
+  hasCorrectHtmlProtocol = (url) => {
+    const protocol = url.split('://')[0].toLowerCase()
+    if (protocol === 'http' || protocol === 'https'){
+      return true
+    }
+    return false
+  }
+
 
   // Gets raw html from url
   getRawHtml = async () => {

@@ -4,6 +4,7 @@ export default class RegexpParsing {
     this.regexPattern = regexPattern
   }
 
+  
   /**
    * A greedy element parser, does global parsing
    *
@@ -18,6 +19,7 @@ export default class RegexpParsing {
     const matchesInPattern = [...dataToParse.matchAll(regExp)]
     return matchesInPattern.map(element => element[0])
   }
+
 
   /**
    * A non greedy element parser, To get text in elements.
