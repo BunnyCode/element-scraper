@@ -124,7 +124,12 @@ Ett undantag finns här, för att plocka ut "tomma texter" bland elementen. Denn
 ## Laborationsreflektion
 > Reflektera över uppgiften utifrån ett kodkvalitetsperspektiv. Använd begrepp ifrån boken. 
 
-Det är relativt svårt att hitta bra och korta namn till en funktion. Men beskrivande namn hjälper till, altså "descriptive names".
-En sak som slog mig var att det kan vara svårt om man har flera metoder, som har nonGreedy eller greedy i början.
-Dessa namn har en tendens att likna varandra i camelCase. Jag har gjort ett par itterationer för att nå en "pretty much what you expected" känsla.
-Jag är medveten om **argument flags** i RegexpParsing klassen kan förbättras med hjälp av konstruktorn, där med dra ner argumentet till ett.
+Det är relativt svårt att hitta bra och korta namn till en funktion. Speciellt med beskrivande namn som hjälper med förståelse, altså **descriptive names**.
+En sak som slog mig var att det kan vara svårt om man har flera metoder, som har nonGreedy eller greedy i början. Även om dessa namn är beskrivande enligt **Descriptive names**. Dessa namn har även en tendens att likna varandra i camelCase. 
+Jag har gjort ett par itterationer med namngivningen för att nå en "pretty much what you expected" känsla.
+Jag är medveten om **argument flags** i RegexpParsing klassen kan förbättras med hjälp av konstruktorn, där med dra ner argumentet för samtliga metoder till ett argument. I den mån jag kunnat är det **Monadic**.
+Jag bröt ut en del hjälpfunktioner för att följa **Do one thing** regeln. Men här kan man ju fråga sig man verkligen gör en sak ändå. Eller om man skulle kallat varje metod för sig och sen skickat svaret vidare till nästa. Detta hade dock bidragit till mer kod för utvecklaren. 
+Där jag har använt hjälpmetoder, har jag försökt följa **Stepdown Rule**, alltså att de ska komma efter funktionerna som använder den. Detta har gjort att koden fått ett bra flöde.
+Gällande **No Sideffects** i koden, så finns det inga metoder som ändrar värden. Men metoden som hämtar data har ett beteende, som försöker anpassa sig efter HTTP eller HTTPS. Dock ska detta inte ha någon inverkan för användaren, förutsatt att det är en riktig URL. Det finns en viss sidoeffekt här. Om man har en felaktig adress får man en **console.error** tillbaka i sin Promise, vilket inte är den förväntade strängen. 
+Jag har försökt hålla alla metoder så korta det bara går, för att minska den mentala komplexiteten. Där det behövs beskrivning av vad ett index är har jag skapat en variabel, som har ett beskrivande namn. Detta ökar antalet rader men gör koden mycket mer lättläst, och minskar ”mental mapping” där man ska komma ihåg vad man tittar på. Jag antar att uttrycket som beskriver CleanCode är sannt, ”clarity is king”. 
+Det har varit givit min kod så mycket att fundera på de koncept jag skrivt om ovan. Kodkvalitet har blivit otroligt mycket bättre, det känns som att man ”riktig” kod nu.
