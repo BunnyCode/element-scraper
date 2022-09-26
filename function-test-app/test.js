@@ -28,7 +28,7 @@ const runAllTests = async () => {
   console.info("Running all tests for defined functions:\n========================================\n")
 
 
-  // Test getting data
+  // Getting data for all tests
   const testData = await getHtmlData(url)
 
 
@@ -59,6 +59,7 @@ const runAllTests = async () => {
   
   // Test parsedata
   consoleLine()
+  console.info('\ngreedyFindSingleLineElements()\n')
   console.info('\nTesting parse HTML element RegExp function\nGot: ')
   const matches = greedyFindSingleLineElements(testData, 'inner2')
   console.log(matches)
@@ -67,6 +68,7 @@ const runAllTests = async () => {
 
   // Test inner text parse
   consoleLine()
+  console.info('\nnonGreedyFindSingleLineElementsInnerText()\n')
   console.info('\nTesting parse inner HTML element RegExp function\n')
   let innerMatches = nonGreedyFindSingleLineElementsInnerText(matches, true)
   console.info("Should contain empty slots in array")
@@ -78,6 +80,7 @@ const runAllTests = async () => {
 
   // Test greedy multiline parse by type
   consoleLine()
+  console.info('\nnonGreedyFindMultiLineElementsByType()\n')
   console.info('\nTesting greedy multiline HTML element RegExp parse function (tr element)\n')
   console.info(`Expected:`)
   console.info(trParseOutput())
@@ -87,6 +90,7 @@ const runAllTests = async () => {
 
   // Test greedy multiline parse by attribute
   consoleLine()
+  console.info('\ngreedyFindMultiLineElementsByAttributeOrText()\n')
   console.info('\nTesting multiline HTML element RegExp parse function (div with class end)\n')
   console.info(`Expected:`)
   console.info(classDivEndOuput())
@@ -100,7 +104,7 @@ const runAllTests = async () => {
   console.info('\nTesting combination of parse methods to get table data')
   console.info('\nCombining greedy multiline parse and non empty singleline text')
   console.info('\nExpected: ')
-  console.info(tableOuptut)
+  console.info(tableOuptut())
   console.info('\nGot: ')
   const tableHtmlData = greedyFindMultiLineElementsByType(testData, 'table')
   console.log(nonGreedyFindSingleLineElementsInnerText(tableHtmlData, false))
