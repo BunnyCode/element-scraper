@@ -49,7 +49,7 @@ export default class RegexpParsing {
    * @return {Array} - Returns an array with all matching patterns.
    */
   nonGreedyMultiLineElementsByType = (dataToParse, elementToMatch) => {
-    this.regexPattern = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+?`
+    this.regexPattern = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ])+?`
     return this.findMultilineElementsWithRegexp(dataToParse, this.regexPattern)
   }
 
@@ -62,7 +62,7 @@ export default class RegexpParsing {
    * @return {Array} - Returns an array with all matching patterns.
    */
   greedyMultiLineElementsByType = (dataToParse, elementToMatch) => {
-    this.regexPattern = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
+    this.regexPattern = `<([${elementToMatch}]+).*?(.*\\n)*.+?(\\<\\/\\1>[\n ])+`
     return this.findMultilineElementsWithRegexp(dataToParse, this.regexPattern)
   }
 
@@ -91,12 +91,24 @@ export default class RegexpParsing {
    * @return {Array} - Returns an array with all matching patterns.
    */
   greedyMultiLineElementsByAttributeOrText = (dataToParse, textOrAttributeMatch) => {
-    const getElementStartAndEndByAttributeOrText = `<([\\w]+).*?${textOrAttributeMatch}(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
+    const getElementStartAndEndByAttributeOrText = `<([\\w]+).*?${textOrAttributeMatch}(.*\\n)*.+?(\\<\\/\\1>[\n ])`
     const regExp = new RegExp(getElementStartAndEndByAttributeOrText, 'g')
     const matchesInPattern = [...dataToParse.matchAll(regExp)]
     return matchesInPattern.map(element => element[0])
   }
 
 
-  // Advanced element find by pattern
+  /**
+   * A greedy Multiline parser, does global parsing
+   *
+   * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
+   * @param {string} dataToParse - Takes string to pars for matches.
+   * @return {Array} - Returns an array with all matching patterns.
+   */
+  nonGreedyMultiLineElementsByAttributeOrText = (dataToParse, textOrAttributeMatch) => {
+    const getElementStartAndEndByAttributeOrText = `<([\\w]+).*?${textOrAttributeMatch}(.*\\n)*?.+?(\\<\\/\\1>[\n ])`
+    const regExp = new RegExp(getElementStartAndEndByAttributeOrText, 'g')
+    const matchesInPattern = [...dataToParse.matchAll(regExp)]
+    return matchesInPattern.map(element => element[0])
+  }
 }

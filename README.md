@@ -30,6 +30,16 @@ import {hasCorrectHtmlProtocol, isHttps, parseDataForMultiLineElements} from 'el
 
 ### Getting Data
 
+#### getHtmlData
+
+```js
+await getHtmlData(url)
+```
+
+**This function is asynchronous**
+To GET the entire HTML page you want to parse, as a string.
+
+---
 
 #### hasCorrectHtmlProtocol
 
@@ -50,18 +60,6 @@ isHttps(url)
 You can check if the URL supplied is HTTPS, this will return true or false.
 
 
-#### getHtmlData
-
-```js
-await getHtmlData(url)
-```
-
-**This function is asynchronous**
-To GET the entire HTML page you want to parse, as a string.
-
----
-
-
 ### Parsing elements
 
 Once you have the data string, you can check start parsing out the elements you would like to get.
@@ -70,30 +68,19 @@ Once you have the data string, you can check start parsing out the elements you 
 #### parseDataForElement
 
 ```js
-parseDataForElements(dataToParse, elementMatch)
+greedyFindSingleLineElements(dataToParse, elementMatch)
 ```
 
 You pass your data string as __dataToParse__. To find a specific class name or element ID pass this as __elementMatch__.
 
 
-#### parseDataForMultiLineElements
-
-```js
-parseDataForMultiLineElements(dataToParse, elementMatch)
-```
-
-To get a multi-line element you use __parseDataForMultiLineElements__
-it looks for the opening and closing tag.
-You pass your data string as __dataToParse__. To find a specific class name or element ID pass this as __elementMatch__. 
-
-
 #### parseElementsInnerText
 
 ```js
-parseElementsInnerText(dataToParse, getEmpty)
+nonGreedyFindSingleLineElementsInnerText(dataToParse, getEmptySpaces)
 ```
 
-Gets all text within >< but not empty spaces (see note) and defaults to **getEmpty** as false / omitted.
+Gets all text within >< but not empty spaces (see note) and defaults to **getEmptySpaces** as false / omitted.
 
 > Note: the empty array data from this function comes from the emptiness in
 \</innerElement\>\</outerElement\> in an element like this.\<outerElement\>Some text\<innerElement\>Some more text\</innerElement\>\</outerElement\>
@@ -113,7 +100,31 @@ Gets all text within >< but not empty spaces (see note) and defaults to **getEmp
 ]
 ```
 
-If you want to have the empty spaces, like above make sure **getEmpty** is set to true
+If you want to have the empty spaces, like above make sure **getEmptySpaces** is set to true
+
+
+#### nonGreedyFindMultiLineElementsByType or greedyFindMultiLineElementsByType
+
+```js
+nonGreedyFindMultiLineElementsByType(dataToParse, elementMatch)
+```
+
+```js
+greedyFindMultiLineElementsByType(dataToParse, elementMatch)
+```
+
+To get a multi-line element you use __nonGreedyFindMultiLineElementsByType__
+The difference is that the non-greedy version will break after the first </> of that element, while the greedy will look for the last possible closing tag, of the same element
+it looks for the opening and closing tag.
+You pass your data string as __dataToParse__. To find a specific class name or element ID pass this as __elementMatch__. 
+
+#### greedyFindMultiLineElementsByAttributeOrText
+
+```js
+greedyFindMultiLineElementsByAttributeOrText(dataToParse, textOrAttributeMatch)
+```
+
+This will allow you to get elements with attributes like class name or text strings.
 
 ### Participate in this module
 

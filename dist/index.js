@@ -96,6 +96,19 @@ const greedyFindMultiLineElementsByAttributeOrText = (dataToParse, textOrAttribu
 /**
  * A non greedy Multiline parser, does global parsing
  *
+ * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
+ * @param {string} dataToParse - Takes string to pars for matches.
+ * @return {Array} - Returns an array with all matching patterns.
+ */
+const nonGreedyFindMultiLineElementsByAttributeOrText = (dataToParse, textOrAttributeMatch) => {
+  const regexpParsing = new RegexpParsing()
+  return regexpParsing.nonGreedyMultiLineElementsByAttributeOrText(dataToParse, textOrAttributeMatch)
+}
+
+
+/**
+ * A non greedy Multiline parser, does global parsing
+ *
  * @param {string} elementToMatch - Gets multi and singleline elements by type.
  * @param {string} dataToParse - Takes string to pars for matches.
  * @return {Array} - Returns an array with all matching patterns.
@@ -119,9 +132,11 @@ const greedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
 }
 
 
+
 export {getHtmlData,
         greedyFindSingleLineElements,
         greedyFindMultiLineElementsByAttributeOrText,
+        nonGreedyFindMultiLineElementsByAttributeOrText,
         greedyFindMultiLineElementsByType,
         nonGreedyFindMultiLineElementsByType,
         nonGreedyFindSingleLineElementsInnerText,

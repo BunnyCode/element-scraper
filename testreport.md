@@ -15,7 +15,6 @@ should return true: true https://bunnycode.github.io/element-scraper/
 
 ================
 
-**isHttps()**
 
 Testing protocol FTP agains isHttps
 
@@ -41,21 +40,22 @@ should return false: false (http://dummy.com)
 
 ================
 
+
 **greedyFindSingleLineElements()**
+
 
 Testing parse HTML element RegExp function
 Got: 
-```console
 [ "<div id='inner2' class='di2'>This is inner 2</div></div>" ]
-```
+
 Expected:
-```console
 [ "<div id='inner2' class='di2'>This is inner 2</div></div>" ]
-```
 
 ================
 
+
 **nonGreedyFindSingleLineElementsInnerText()**
+
 
 Testing parse inner HTML element RegExp function
 
@@ -66,7 +66,9 @@ Should NOT contain empty slots in array
 
 ================
 
-**nonGreedyFindMultiLineElementsByType**
+
+**nonGreedyFindMultiLineElementsByType()**
+
 
 Testing greedy multiline HTML element RegExp parse function (tr element)
 
@@ -95,8 +97,7 @@ Expected:
     '          <td>4</td>\n' +
     '          <td>5</td>\n' +
     '          <td>6</td>\n' +
-    '        </tr>\n' +
-    '      '
+    '        </tr>\n'
 ]
 ```
 Got:
@@ -106,32 +107,30 @@ Got:
     '          <td>Title1</td>\n' +
     '          <td>Title2</td>\n' +
     '          <td>Title3</td>\n' +
-    '        </tr>\n' +
-    '      ',
+    '        </tr>\n',
   '<tr>\n' +
     '          <td>1</td>\n' +
     '          <td>2</td>\n' +
     '          <td>3</td>\n' +
-    '        </tr>\n' +
-    '        ',
+    '        </tr>\n',
   '<tr>\n' +
     '          <td>9</td>\n' +
     '          <td>7</td>\n' +
     '          <td>6</td>\n' +
-    '        </tr>\n' +
-    '        ',
+    '        </tr>\n',
   '<tr>\n' +
     '          <td>4</td>\n' +
     '          <td>5</td>\n' +
     '          <td>6</td>\n' +
-    '        </tr>\n' +
-    '      '
+    '        </tr>\n'
 ]
 ```
 
 ================
 
+
 **greedyFindMultiLineElementsByAttributeOrText()**
+
 
 Testing multiline HTML element RegExp parse function (div with class end)
 
@@ -142,8 +141,7 @@ Expected:
     '    <p>Last div</p>\n' +
     '    <strong class="strength">Is here\n' +
     '\n' +
-    '    </strong></div>\n' +
-    '    '
+    '    </strong></div>\n'
 ]
 ```
 Got:
@@ -153,9 +151,54 @@ Got:
     '    <p>Last div</p>\n' +
     '    <strong class="strength">Is here\n' +
     '\n' +
-    '    </strong></div>\n' +
-    '    '
+    '    </strong></div>\n'
 ]
+```
+
+================
+
+
+**greedyFindMultiLineElementsByAttributeOrText()**
+
+
+Testing greedy multiline RegExp parse function (p element containing "Last")
+
+Expected:
+```console
+[
+  '<p>Last div</p>\n' +
+    '    <strong class="strength">Is here\n' +
+    '\n' +
+    '    </strong></div>\n' +
+    '    <p>This page is intentionally boring and strangely formed to test the app.</p>\n'
+]
+```
+Got:
+```console
+[
+  '<p>Last div</p>\n' +
+    '    <strong class="strength">Is here\n' +
+    '\n' +
+    '    </strong></div>\n' +
+    '    <p>This page is intentionally boring and strangely formed to test the app.</p>\n'
+]
+```
+
+================
+
+
+**nonGreedyFindMultiLineElementsByAttributeOrText()**
+
+
+Testing non-greedy multiline RegExp parse function (p element containing "Last")
+
+Expected:
+```console
+[ '<p>Last div</p>\n' ]
+```
+Got:
+```console
+[ '<p>Last div</p>\n' ]
 ```
 
 ================
@@ -168,8 +211,7 @@ Testing combination of parse methods to get table data
 
 Combining greedy multiline parse and non empty singleline text
 
-Expected: 
-
+Expected:
 ```console
 [
   'Title1', 'Title2',

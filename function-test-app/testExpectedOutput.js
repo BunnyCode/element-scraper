@@ -22,8 +22,7 @@ const trParseOutput = () => {
       '          <td>4</td>\n' +
       '          <td>5</td>\n' +
       '          <td>6</td>\n' +
-      '        </tr>\n' +
-      '      '
+      '        </tr>\n'
   ]
 }
 
@@ -33,8 +32,7 @@ const classDivEndOuput = () => {
       '    <p>Last div</p>\n' +
       '    <strong class="strength">Is here\n' +
       '\n' +
-      '    </strong></div>\n' +
-      '    '
+      '    </strong></div>\n'
   ]
 }
 
@@ -49,6 +47,24 @@ const tableOuptut = () => {
   ]
 }
 
+const greedyPOutput = () => {
+  return [
+    '<p>Last div</p>\n' +
+      '    <strong class="strength">Is here\n' +
+      '\n' +
+      '    </strong></div>\n' +
+      '    <p>This page is intentionally boring and strangely formed to test the app.</p>\n'
+  ]
+}
+
+const nonGreedyPOutput = () => {
+  return [ '<p>Last div</p>\n' ]
+}
+
+
+
 export {trParseOutput,
         classDivEndOuput,
-        tableOuptut}
+        tableOuptut,
+        greedyPOutput,
+        nonGreedyPOutput}
