@@ -1,4 +1,4 @@
-import {getDataForElements,
+import {greedySingleLineDateForElements,
         getHtmlData,
         isHttps,
         hasCorrectHtmlProtocol,
@@ -45,9 +45,9 @@ const runAllTests = async () => {
   // Test parsedata
   consoleLine()
   console.info('\nTesting parse HTML element RegExp function\nGot: ')
-  const matches = getDataForElements(testData, 'inner2')
+  const matches = greedySingleLineDateForElements(testData, 'inner2')
   console.log(matches)
-  console.log("\nexpected\n[ \"<div id='inner2' class='di2'>This is inner 2</div></div>\" ]")
+  console.log("\nExpected:\n[ \"<div id='inner2' class='di2'>This is inner 2</div></div>\" ]")
   
   // Test inner text parse
   consoleLine()

@@ -10,8 +10,6 @@ import RegexpParsing from './regexpParsing.js'
 import regexpParsing from './regexpParsing.js'
 
 
-
-
 /**
  * Returns promise, resulting in a string, will take HTTP or HTTPS url's.
  *
@@ -66,14 +64,12 @@ const getHtmlData = async(url) => {
  * A greedy element parser, does global parsing
  *
  * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
- * @param {string} dataToParse - Takes string to pars for matches.
+ * @param {string} dataToParse - Takes string to parse for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const getDataForElements = (dataToParse, elementMatch) => {
-  const parsePattern = `<.*${elementMatch}.*>`
-  const regExp = new RegExp(parsePattern, 'g')
-  const matchesInPattern = [...dataToParse.matchAll(regExp)]
-  return matchesInPattern.map(element => element[0])
+const greedySingleLineDateForElements = (dataToParse, elementMatch) => {
+  const regexpParsing = new RegexpParsing()
+  return regexpParsing.getDataForElements(dataToParse, elementMatch)
 }
 
 
@@ -85,11 +81,8 @@ const getDataForElements = (dataToParse, elementMatch) => {
  * @return {Array} - Returns an array with all matching patterns.
  */
 const greedyFindMultiLineElementsByAttributeOrText = (dataToParse, textOrAttributeMatch) => {
-  // <([\w]+).*?temp-high(.*\n)*?.+?(\<\/\1>[\n ]*)+
-  const getElementStartAndEndByAttributeOrText = `<([\\w]+).*?${textOrAttributeMatch}(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
-  const regExp = new RegExp(getElementStartAndEndByAttributeOrText, 'g')
-  const matchesInPattern = [...dataToParse.matchAll(regExp)]
-  return matchesInPattern.map(element => element[0])
+  const regexpParsing = new RegexpParsing()
+  return regexpParsing.greedyMultiLineElementsByAttributeOrText(dataToParse, textOrAttributeMatch)
 }
 
 
@@ -119,48 +112,24 @@ const greedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
 }
 
 
-// move to regexp class.
-/**
- * Internal helper for element type finder.
- *
- * @param {array} dataToParse - Data to parse with regexp
- * @param {*} regexpPattern - Regexp to use for finding element
- * @returns 
- */
-const findMultilineElementsWithRegexp = (dataToParse, regexpPattern) => {
-  const captureGroup = 1
-  const applyPatternGlobaly = 'g'
-  const regExp = new RegExp(regexpPattern, applyPatternGlobaly)
-  const matchesInPattern = [...dataToParse.matchAll(regExp)]
-  return matchesInPattern.map(element => element[captureGroup])
-}
-
 /**
  * A non greedy element parser, To get text in elements.
  *
- * @param {boolean} getEmpty - True or, false to filter out empty spaces. 
+ * @param {boolean} getEmptySpaces - True or, false to filter out empty spaces. 
  * @param {Array} dataToParse - Takes array to parse, joins array elements with newline
  * @return {Array} - Returns an array with all matching patterns, Non Greedy RegExp.
  */
-const nonGreedyFindSingleLineElementsInnerText = (dataToParse, getEmpty) => {
-  const findEmpty = getEmpty ? `>(.*?)<` : `>(.+?)<`
-  const joinArrayWith = '\n'
-  const captureGroup = 1
-  const applyPatternGlobaly = 'g'
-  const regExp = new RegExp(findEmpty, applyPatternGlobaly)
-  const matchesInPattern = [...dataToParse.join(`${joinArrayWith}`).matchAll(regExp)]
-  return matchesInPattern.map((element) => {
-      return element[captureGroup]
-  })
+const nonGreedyFindSingleLineElementsInnerText = (dataToParse, getEmptySpaces) => {
+  const regexpParsing = new RegexpParsing()
+  return regexpParsing.nonGreedySingleLineElementsInnerText(dataToParse, getEmptySpaces)
 }
 
 
 export {getHtmlData,
-        getDataForElements,
+        greedySingleLineDateForElements,
         greedyFindMultiLineElementsByAttributeOrText,
         greedyFindMultiLineElementsByType,
         nonGreedyMultiLineElementsByType,
         nonGreedyFindSingleLineElementsInnerText,
-        findMultilineElementsWithRegexp,
         isHttps,
         hasCorrectHtmlProtocol}

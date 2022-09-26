@@ -4,6 +4,40 @@ export default class RegexpParsing {
     this.regexPattern = regexPattern
   }
 
+  /**
+   * A greedy element parser, does global parsing
+   *
+   * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
+   * @param {string} dataToParse - Takes string to pars for matches.
+   * @return {Array} - Returns an array with all matching patterns.
+   */
+  getDataForElements = (dataToParse, elementMatch) => {
+    const parsePattern = `<.*${elementMatch}.*>`
+    const applyPatternGlobaly = 'g'
+    const regExp = new RegExp(parsePattern, applyPatternGlobaly)
+    const matchesInPattern = [...dataToParse.matchAll(regExp)]
+    return matchesInPattern.map(element => element[0])
+  }
+
+  /**
+   * A non greedy element parser, To get text in elements.
+   *
+   * @param {boolean} getEmptySpaces - True or, false to filter out empty spaces. 
+   * @param {Array} dataToParse - Takes array to parse, joins array elements with newline
+   * @return {Array} - Returns an array with all matching patterns, Non Greedy RegExp.
+   */
+  nonGreedySingleLineElementsInnerText = (dataToParse, getEmptySpaces) => {
+    const findEmpty = getEmptySpaces ? `>(.*?)<` : `>(.+?)<`
+    const joinArrayWith = '\n'
+    const captureGroup = 1
+    const applyPatternGlobaly = 'g'
+    const regExp = new RegExp(findEmpty, applyPatternGlobaly)
+    const matchesInPattern = [...dataToParse.join(`${joinArrayWith}`).matchAll(regExp)]
+    return matchesInPattern.map((element) => {
+        return element[captureGroup]
+    })
+  }
+
 
   /**
    * A non greedy Multiline parser, does global parsing
@@ -31,7 +65,6 @@ export default class RegexpParsing {
   }
 
 
-  // move to regexp class.
   /**
    * Internal helper for element type finder.
    *
@@ -46,6 +79,22 @@ export default class RegexpParsing {
     const matchesInPattern = [...dataToParse.matchAll(regExp)]
     return matchesInPattern.map(element => element[captureGroup])
   }
+
+
+  /**
+   * A greedy Multiline parser, does global parsing
+   *
+   * @param {string} elementMatch - Part of an element that you want to get, like class, id or text.
+   * @param {string} dataToParse - Takes string to pars for matches.
+   * @return {Array} - Returns an array with all matching patterns.
+   */
+  greedyMultiLineElementsByAttributeOrText = (dataToParse, textOrAttributeMatch) => {
+    const getElementStartAndEndByAttributeOrText = `<([\\w]+).*?${textOrAttributeMatch}(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
+    const regExp = new RegExp(getElementStartAndEndByAttributeOrText, 'g')
+    const matchesInPattern = [...dataToParse.matchAll(regExp)]
+    return matchesInPattern.map(element => element[0])
+  }
+
 
   // Advanced element find by pattern
 }
