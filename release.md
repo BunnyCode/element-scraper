@@ -89,26 +89,17 @@ För de sista 3 testerna se [testrapporten](https://github.com/BunnyCode/element
 >**Fetmarkera** de "regler" som används ur CC. Ni kan frångå tabellformat om ni vill. Skapa direktlänkar till er kod där det är lämpligt. Skriv så att jag kan förstå.
 ​
 
-**Dont Be Cute**, namnen ska vara tydlig och inte kräva kulturella refferenser eller slang.
-
-**Short**, alla metoder ska vara så korta det går, utan att dom blir oläsliga. 
-
-**Descriptiv names**, alla funktions/metodnamn försöker förklar vad som kommer hända, utan att man läser jsdoc.
-
-**Domän namn**, variabel och metodnamn passar i den kontext de används. tillexempel Element är vanligt i web sammanhang.
-
-**Do one thing**, metoderna gör en sak, som överrensstämmer med namet. Det går inte att extrahera extra funktioner ifrån dem.
+* **Dont Be Cute**, namnen ska vara tydlig och inte kräva kulturella refferenser eller slang.
+* **Short**, alla metoder ska vara så korta det går, utan att dom blir oläsliga. 
+* **Descriptiv names**, alla funktions/metodnamn försöker förklar vad som kommer hända, utan att man läser jsdoc.
+* **Domän namn**, variabel och metodnamn passar i den kontext de används. tillexempel Element är vanligt i web sammanhang.
+* **Do one thing**, metoderna gör en sak, som överrensstämmer med namet. Det går inte att extrahera extra funktioner ifrån dem.
 Ett undantag finns här, för att plocka ut "tomma texter" bland elementen. Denna del bör eventuellt skrivas om.
-
-**No Sideffects** funktionerna gör det dom säger att dom ska göra. Dom ändrar inte andra delar i applikationen.
-
-**Command Query Separation**, alla metoder ger data tillbaka, altså svarar på input. Inga publika metoder gör förändringar.
-
-**Stepdown Rule**, funktionerna kommer i en ordning som gör att man kan läsa dem lätt. (i parser klassen finns en helper metod)
-
-**Function arguments**, Så få argument som möjligt. Har gjort ett par vändor där jag plockat bort "onödiga" argument.
-
-**DRY**, dom metoder som kan dela funtionallitet använder en helper metod för detta.
+* **No Sideffects** funktionerna gör det dom säger att dom ska göra. Dom ändrar inte andra delar i applikationen.
+* **Command Query Separation**, alla metoder ger data tillbaka, altså svarar på input. Inga publika metoder gör förändringar.
+* **Stepdown Rule**, funktionerna kommer i en ordning som gör att man kan läsa dem lätt. (i parser klassen finns en helper metod)
+* **Function arguments**, Så få argument som möjligt. Har gjort ett par vändor där jag plockat bort "onödiga" argument.
+* **DRY**, dom metoder som kan dela funtionallitet använder en helper metod för detta.
 
 ### Namngivning
 ​
