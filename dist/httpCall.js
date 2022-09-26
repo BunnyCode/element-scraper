@@ -17,6 +17,7 @@ export default class HttpCall {
     return false
   }
 
+
   /**
    * Makes sure the string starts with http or https
    *
@@ -24,7 +25,8 @@ export default class HttpCall {
    * @returns - Boolean True or false.
    */
   hasCorrectHtmlProtocol = (url) => {
-    const protocol = url.split('://')[0].toLowerCase()
+    const getFirstPartOfSplit = 0
+    const protocol = url.split('://')[getFirstPartOfSplit].toLowerCase()
     if (protocol === 'http' || protocol === 'https'){
       return true
     }

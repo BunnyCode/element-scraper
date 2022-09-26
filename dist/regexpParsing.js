@@ -15,9 +15,10 @@ export default class RegexpParsing {
    greedySingleLineElements = (dataToParse, elementMatch) => {
     const parsePattern = `<.*${elementMatch}.*>`
     const applyPatternGlobaly = 'g'
+    const captureGroup = 0
     const regExp = new RegExp(parsePattern, applyPatternGlobaly)
     const matchesInPattern = [...dataToParse.matchAll(regExp)]
-    return matchesInPattern.map(element => element[0])
+    return matchesInPattern.map(element => element[captureGroup])
   }
 
 

@@ -8,6 +8,18 @@ import RegexpParsing from './regexpParsing.js'
 
 
 /**
+ * returns source HTML from URL as a string
+ *
+ * @param {string} url - Takes a URL as string
+ * @returns {string} - Returns HTML page as a string
+ */
+const getHtmlData = async(url) => {
+  const htmlBody = await getHtmlBody(url)
+  return htmlBody
+}
+
+
+/**
  * Returns promise, resulting in a string, will take HTTP or HTTPS url's.
  *
  * @param {string} url - URL to get body from.
@@ -39,18 +51,6 @@ const hasCorrectHtmlProtocol = (url) => {
 const isHttps = (url) => {
   const httpCall = new HttpCall(url)
   return httpCall.isHttps() 
-}
-
-
-/**
- * returns source HTML from URL as a string
- *
- * @param {string} url - Takes a URL as string
- * @returns {string} - Returns HTML page as a string
- */
-const getHtmlData = async(url) => {
-  const htmlBody = await getHtmlBody(url)
-  return htmlBody
 }
 
 

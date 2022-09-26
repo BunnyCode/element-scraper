@@ -54,7 +54,7 @@ Sen kommer nonGreedySingleElementsInnerText som ser till att man kan plocka ut t
 Jag har gjort körningar med **npm run test** som startar [Test appen](https://github.com/BunnyCode/element-scraper/tree/main/function-test-app) mot en github page sida.
 https://bunnycode.github.io/element-scraper/
 
-Då denna sida inte ändras kan resultaten veriferias mellan varje förändring / itteration. Ska den uppdateras så kommer det endast tillkomma mer komplexa strtukturer.
+Då denna sida inte ändras kan resultaten veriferias mellan varje förändring / itteration. Ska den uppdateras så kommer det endast tillkomma mer komplexa strukturer.
 När jag gjorde om greedy och non greedy funktionerna, så var detta viktigt för att se att man fick förväntade resultat.
 
 Tanken var att köra med testramverk, men då det tog mer tid än jag tänkt mig så lät jag skriva metod anrop som ger en gämförelseutskrift.
@@ -90,13 +90,14 @@ För de sista 3 testerna se testrapporten, då de inte får plats i tabellen på
 ​
 
 **Dont Be Cute**, namnen ska vara tydlig och inte kräva kulturella refferenser eller slang.
+**Short**, alla metoder ska vara så korta det går, utan att dom blir oläsliga. 
+**Descriptiv names**, alla funktions/metodnamn försöker förklar vad som kommer hända, utan att man läser jsdoc.
 **Domän namn**, variabel och metodnamn passar i den kontext de används. tillexempel Element är vanligt i web sammanhang.
 **Do one thing**, metoderna gör en sak, som överrensstämmer med namet. Det går inte att extrahera extra funktioner ifrån dem.
 Ett undantag finns här, för att plocka ut "tomma texter" bland elementen. Denna del bör eventuellt skrivas om.
 **No Sideffects** funktionerna gör det dom säger att dom ska göra. Dom ändrar inte andra delar i applikationen.
 **Command Query Separation**, alla metoder ger data tillbaka, altså svarar på input. Inga publika metoder gör förändringar.
 **Stepdown Rule**, funktionerna kommer i en ordning som gör att man kan läsa dem lätt. (i parser klassen finns en helper metod)
-**Descriptiv names**, har namn som berättar vad dom gör, utan att man läser jsdoc.
 **Function arguments**, Så få argument som möjligt. Har gjort ett par vändor där jag plockat bort "onödiga" argument.
 **DRY**, dom metoder som kan dela funtionallitet använder en helper metod för detta.
 
@@ -105,14 +106,20 @@ Ett undantag finns här, för att plocka ut "tomma texter" bland elementen. Denn
 | Namn och förklaring  | Reflektion                                   |
 | -------------------  | ---------------------------------------------|
 | isHttps                                 | **Method name** "is" i namnet läser som en fråga och vi kan förvänta oss sannt eller falsk |
+| getHtmlData    | **Method Names** Här kanske det hade varit värt att byta Data till något som inte går att missförså, vad menas med data i denna metod? Body, request header? **DRY** Metoden använder sig av hjälpare som gör andra saker, dock gör denna endast på en sak oavsett om det är http eller https|
+| hasCorrectHtmlProtocol    | **Method Names** "Has" kan ju eventuellt bytas till "is" för att vara enhetligt med isHttps. |
 | nonGreedyFindMultiLineElementsByType    | **Domain Names** Elements och multiline är kända uttryck från webutveckling|
-| nonGreedyFindMultiLineElementsByType    | **Domain Names** |
+| RegexpParsing    | **Function arguments**, här skulle man ju vela dra ner antalet argument till ett. Efter som man skapar en ny instans av regexpParsern hade man kunnat skicka med data där, därment undvika att man skickar arguementen i fel ordning. Detta hade eventuellt krävt att man skriver om Index till en klass vilket har andra problem.|
 ​
 ### Funktioner
 ​
-| Metodnamn och förklaring  | Reflektion                                   |
-| -------------------  | ---------------------------------------------|
-|                      |                                              |
+| Metodnamn och förklaring            | Antal rader | Reflektion                                   |
+| ----------------------------------- | ----------- | ---------------------------------------------|
+| getRawHtml                          | 17          | **niladic** metoden har inga argument i sig utan får dessa genom instansen av klassen som skapas. **Do one thing**, metoden gör egentligen 2 saker först kollar den om det är https eller inte sen hämtar den data, men med hjälp av en helper metod.|
+| nonGreedySingleLineElementsInnerText| 9           | **dyadic** Metoden tar 2 argument men hade antagligen kunnat initialiseras när ett klassen skapas. **Use Descriptive names** Metoden beskriver presis vad den ska göra med sitt namn|
+| hasCorrectHtmlProtocol              | 8           | **monadic** Metoden tar ett argument, men även här hade det kunnat initeras med URL när man skapar klassen|
+| greedySingleLineElements            | 8           | **Short** metoden gör något anorlunda än de andra som kan dela på kod genom en hjälpmetod. Detta kunde gjorts om till en mer generll hjälpfunktion|
+| findMultilineElementsWithRegexp     | 7           | **Stepdown Rule**, hjälpmetoden ligger direkt efter de 2 metoder som använder samma kod, med olika regex strängar. Vilket gör att den läser uppeifrån och ner. **DRY** eftersom två andra metoder gör samma anrop så samlar jag algoritmen på ett ställe.  |
 ​
 ## Laborationsreflektion
 > Reflektera över uppgiften utifrån ett kodkvalitetsperspektiv. Använd begrepp ifrån boken. 
