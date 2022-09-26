@@ -61,9 +61,22 @@ const getHtmlData = async(url) => {
  * @param {string} dataToParse - Takes string to parse for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const greedySingleLineDateForElements = (dataToParse, elementMatch) => {
+const greedyFindSingleLineElements = (dataToParse, elementMatch) => {
   const regexpParsing = new RegexpParsing()
-  return regexpParsing.getDataForElements(dataToParse, elementMatch)
+  return regexpParsing.greedySingleLineElements(dataToParse, elementMatch)
+}
+
+
+/**
+ * A non greedy element parser, To get text in elements.
+ *
+ * @param {boolean} getEmptySpaces - True or, false to filter out empty spaces. 
+ * @param {Array} dataToParse - Takes array to parse, joins array elements with newline
+ * @return {Array} - Returns an array with all matching patterns, Non Greedy RegExp.
+ */
+ const nonGreedyFindSingleLineElementsInnerText = (dataToParse, getEmptySpaces) => {
+  const regexpParsing = new RegexpParsing()
+  return regexpParsing.nonGreedySingleLineElementsInnerText(dataToParse, getEmptySpaces)
 }
 
 
@@ -87,9 +100,9 @@ const greedyFindMultiLineElementsByAttributeOrText = (dataToParse, textOrAttribu
  * @param {string} dataToParse - Takes string to pars for matches.
  * @return {Array} - Returns an array with all matching patterns.
  */
-const nonGreedyMultiLineElementsByType = (dataToParse, elementToMatch) => {
+const nonGreedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
   const regexpParsing = new RegexpParsing()
-  return regexpParsing.nonGreedyFindMultiLineElementsByType(dataToParse, elementToMatch)
+  return regexpParsing.nonGreedyMultiLineElementsByType(dataToParse, elementToMatch)
 }
 
 
@@ -106,24 +119,11 @@ const greedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
 }
 
 
-/**
- * A non greedy element parser, To get text in elements.
- *
- * @param {boolean} getEmptySpaces - True or, false to filter out empty spaces. 
- * @param {Array} dataToParse - Takes array to parse, joins array elements with newline
- * @return {Array} - Returns an array with all matching patterns, Non Greedy RegExp.
- */
-const nonGreedyFindSingleLineElementsInnerText = (dataToParse, getEmptySpaces) => {
-  const regexpParsing = new RegexpParsing()
-  return regexpParsing.nonGreedySingleLineElementsInnerText(dataToParse, getEmptySpaces)
-}
-
-
 export {getHtmlData,
-        greedySingleLineDateForElements,
+        greedyFindSingleLineElements,
         greedyFindMultiLineElementsByAttributeOrText,
         greedyFindMultiLineElementsByType,
-        nonGreedyMultiLineElementsByType,
+        nonGreedyFindMultiLineElementsByType,
         nonGreedyFindSingleLineElementsInnerText,
         isHttps,
         hasCorrectHtmlProtocol}

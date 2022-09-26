@@ -4,7 +4,7 @@ export default class RegexpParsing {
     this.regexPattern = regexPattern
   }
 
-  
+
   /**
    * A greedy element parser, does global parsing
    *
@@ -12,7 +12,7 @@ export default class RegexpParsing {
    * @param {string} dataToParse - Takes string to pars for matches.
    * @return {Array} - Returns an array with all matching patterns.
    */
-  getDataForElements = (dataToParse, elementMatch) => {
+   greedySingleLineElements = (dataToParse, elementMatch) => {
     const parsePattern = `<.*${elementMatch}.*>`
     const applyPatternGlobaly = 'g'
     const regExp = new RegExp(parsePattern, applyPatternGlobaly)
@@ -48,7 +48,7 @@ export default class RegexpParsing {
    * @param {string} dataToParse - Takes string to pars for matches.
    * @return {Array} - Returns an array with all matching patterns.
    */
-  nonGreedyFindMultiLineElementsByType = (dataToParse, elementToMatch) => {
+  nonGreedyMultiLineElementsByType = (dataToParse, elementToMatch) => {
     this.regexPattern = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+?`
     return this.findMultilineElementsWithRegexp(dataToParse, this.regexPattern)
   }
@@ -61,7 +61,7 @@ export default class RegexpParsing {
    * @param {string} dataToParse - Takes string to pars for matches.
    * @return {Array} - Returns an array with all matching patterns.
    */
-  greedMultiLineElementsByType = (dataToParse, elementToMatch) => {
+  greedyMultiLineElementsByType = (dataToParse, elementToMatch) => {
     this.regexPattern = `<([${elementToMatch}]+).*?(.*\\n)*?.+?(\\<\\/\\1>[\n ]*)+`
     return this.findMultilineElementsWithRegexp(dataToParse, this.regexPattern)
   }
@@ -75,7 +75,7 @@ export default class RegexpParsing {
    * @returns 
    */
   findMultilineElementsWithRegexp = (dataToParse, regexpPattern) => {
-    const captureGroup = 1
+    const captureGroup = 0
     const applyPatternGlobaly = 'g'
     const regExp = new RegExp(regexpPattern, applyPatternGlobaly)
     const matchesInPattern = [...dataToParse.matchAll(regExp)]
