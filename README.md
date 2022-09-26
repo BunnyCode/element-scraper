@@ -26,6 +26,25 @@ Alternate methods
 import {hasCorrectHtmlProtocol, isHttps, parseDataForMultiLineElements} from 'element-scraper'
 ```
 
+
+#### All available GET methods
+
+* getHtmlData,
+* isHttps,
+* hasCorrectHtmlProtocol
+
+#### All available Parsing methods
+* greedyFindSingleLineElements
+* greedyFindMultiLineElementsByAttributeOrText
+* nonGreedyFindMultiLineElementsByAttributeOrText *
+* greedyFindMultiLineElementsByType
+* nonGreedyFindMultiLineElementsByType
+* nonGreedyFindSingleLineElementsInnerText
+
+> All parsing methods follow the schema of (dataToParse, "What you are looking for")
+except for **nonGreedySingleLineElementsInnerText(dataToParse, boolean: getEmptySpaces)**
+See example further down this page.
+
 ---
 
 ### Getting Data
@@ -118,10 +137,15 @@ The difference is that the non-greedy version will break after the first </> of 
 it looks for the opening and closing tag.
 You pass your data string as __dataToParse__. To find a specific class name or element ID pass this as __elementMatch__. 
 
-#### greedyFindMultiLineElementsByAttributeOrText
+#### greedyFindMultiLineElementsByAttributeOrText or nonGreedy
+
+The same idea applies here, to break early or not
 
 ```js
 greedyFindMultiLineElementsByAttributeOrText(dataToParse, textOrAttributeMatch)
+```
+```js
+nonGreedyFindMultiLineElementsByAttributeOrText(dataToParse, textOrAttributeMatch)
 ```
 
 This will allow you to get elements with attributes like class name or text strings.
