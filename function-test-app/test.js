@@ -11,7 +11,8 @@ import {greedyFindSingleLineElements,
 
 import {
   trParseOutput,
-  classDivEndOuput
+  classDivEndOuput,
+  tableOuptut
 } from './testExpectedOutput.js'
 
 
@@ -98,7 +99,9 @@ const runAllTests = async () => {
   console.info('\ngreedyFindMultiLineElementsByType() + nonGreedyFindSingleLineElementsInnerText()\n')
   console.info('\nTesting combination of parse methods to get table data')
   console.info('\nCombining greedy multiline parse and non empty singleline text')
-  console.info('\nShould return title 1-3 and 9 numbers\n1,2,3,9,7,6,4,5,6')
+  console.info('\nExpected: ')
+  console.info(tableOuptut)
+  console.info('\nGot: ')
   const tableHtmlData = greedyFindMultiLineElementsByType(testData, 'table')
   console.log(nonGreedyFindSingleLineElementsInnerText(tableHtmlData, false))
   
