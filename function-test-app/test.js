@@ -57,7 +57,7 @@ const runAllTests = async () => {
   consoleLine()
   console.info('**isHttps()**\n\nTesting HTTPS (actual https and http)\n')
   console.info('should return true:', isHttps(url), `(${url})`)
-  console.info('should return false:', isHttps('http://dummy.com'), '(http://dummy.com)')
+
   
   
   // Test parsedata
