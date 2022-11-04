@@ -1,7 +1,4 @@
 import {greedyFindSingleLineElements,
-        getHtmlData,
-        isHttps,
-        hasCorrectHtmlProtocol,
         nonGreedyFindSingleLineElementsInnerText,
         greedyFindMultiLineElementsByAttributeOrText,
         nonGreedyFindMultiLineElementsByAttributeOrText,
@@ -30,33 +27,6 @@ const runAllTests = async () => {
   console.info('========================================')
   console.info("Running all tests for defined functions:\n========================================\n")
 
-
-  // Getting data for all tests
-  const testData = await getHtmlData(url)
-
-
-  // Test is hasCorrectHtmlProtocol
-  consoleLine()
-  console.info('\n**hasCorrectHtmlProtocol()**\n\nTesting if URL starts with HTTP\n')
-  console.info('should return false:', hasCorrectHtmlProtocol(incorrectUrl), incorrectUrl)
-  console.info('should return true:', hasCorrectHtmlProtocol(url), url)
-  // Test is http
-  consoleLine()
-  console.info('\nTesting protocol FTP agains isHttps\n')
-  console.info('should return false:', isHttps(incorrectUrl), incorrectUrl)
-  
-
-  // Test is http
-  consoleLine()
-  console.info('**isHttps()**\n\nTesting HTTP (!isHttps and isHttps)\n')
-  console.info('should return true:', !isHttps('http://dummy.com'), '(http://dummy.com)')
-  console.info('should return false:', isHttps('http://dummy.com'), '(http://dummy.com)')
-  
-
-  // Test is https
-  consoleLine()
-  console.info('**isHttps()**\n\nTesting HTTPS (actual https and http)\n')
-  console.info('should return true:', isHttps(url), `(${url})`)
 
   
   

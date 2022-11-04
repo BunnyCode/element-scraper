@@ -2,7 +2,23 @@
 Scrapes elements from a URL
 Written in pure JavaScript, and without any extra dependencies.
 
-> **Be aware**: names of methods are probable to change until version 0.1.0
+### What it does
+
+The package is able to take specific part of a webpage and capture the text or containing elements.
+This is done with RegEx. If you want to grab the values of a table, it's possible to select the class or part of text in that element and get all the innerHTML out.
+It's also possible to get several elements of the same type as an array output.
+
+### What needs to be added.
+
+Adding functionality to get larger elements where we have a div containing other div elements.
+This is currently not possible, since greedy regex is not suited for HTML.
+Due to its way of finding the last possible, setting it as an end point will become the last div on the page.
+
+Read more here: https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags
+The third and fourth post explains the issue well.
+
+
+> **Be aware**: Data fetching removed in version > 0.2.0 (to accommodate web compatibility, npm install)
 
 **release notes can be found [here](https://github.com/BunnyCode/element-scraper/blob/main/releasenotes.md)**
 
@@ -14,24 +30,58 @@ It does not handle logins at its current stage.
 > npm i element-scraper
 
 
+### Examples
+
+1. Use a tool like axios to fetch data, from: 'https://bunnycode.github.io/element-scraper/'
+
+Presume we have the data in a variable named "data"
+
+```js
+console.log(nonGreedyFindMultiLineElementsByType(data, 'tr'))
+```
+
+should give us the result
+
+```console
+[
+  '<tr>\n' +
+    '          <td>Title1</td>\n' +
+    '          <td>Title2</td>\n' +
+    '          <td>Title3</td>\n' +
+    '        </tr>\n' +
+    '      ',
+  '<tr>\n' +
+    '          <td>1</td>\n' +
+    '          <td>2</td>\n' +
+    '          <td>3</td>\n' +
+    '        </tr>\n' +
+    '        ',
+  '<tr>\n' +
+    '          <td>9</td>\n' +
+    '          <td>7</td>\n' +
+    '          <td>6</td>\n' +
+    '        </tr>\n' +
+    '        ',
+  '<tr>\n' +
+    '          <td>4</td>\n' +
+    '          <td>5</td>\n' +
+    '          <td>6</td>\n' +
+    '        </tr>\n'
+]
+```
+
 ### How to use
 
 ```js
-import {getHtmlData, parseDataForElement, parseElementsInnerText} from 'element-scraper'
+import {parseDataForElement, parseElementsInnerText} from 'element-scraper'
 ```
 
 Alternate methods
 
 ```js
-import {hasCorrectHtmlProtocol, isHttps, parseDataForMultiLineElements} from 'element-scraper'
+import {parseDataForMultiLineElements} from 'element-scraper'
 ```
 
-
-#### All available GET methods
-
-* getHtmlData,
-* isHttps,
-* hasCorrectHtmlProtocol
 
 #### All available Parsing methods
 * greedyFindSingleLineElements
@@ -48,36 +98,6 @@ See example further down this page.
 ---
 
 ### Getting Data
-
-#### getHtmlData
-
-```js
-await getHtmlData(url)
-```
-
-**This function is asynchronous**
-To GET the entire HTML page you want to parse, as a string.
-
----
-
-#### hasCorrectHtmlProtocol
-
-```js
-hasCorrectHtmlProtocol(url)
-```
-
-Checks if the URL seems to have to correct protocol, as in http or https.
-It will however not check that it is a completely valid URL
-
-
-#### isHttps
-
-```js
-isHttps(url)
-```
-
-You can check if the URL supplied is HTTPS, this will return true or false.
-
 
 ### Parsing elements
 
